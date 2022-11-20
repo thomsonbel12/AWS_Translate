@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Translate Web</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="rgbRed-text fontWeight-900 padding-12">TRANSLATE WEB</h1>
+        <div class="sub-container">
+            <div class="content">
+                <div class="top-side">
+                    <div class="select-language">
+                        <p>Insert Language: </p>
+                        <select class="form-select" id="sourceLanguageCodeDropdown">
+
+                        </select>
+                    </div>
+                    <div class="swap btn">
+                        <button class="swap btn">
+                            <i class="fa-solid fa-right-left"></i>
+                        </button>
+                    </div>
+                    <div class="select-language">
+                        <p>Result Language: </p>
+                        <select class="form-select" id="targetLanguageCodeDropdown">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="body-side">
+
+                    <div class="left-side">
+                        <div>
+                            <textarea id="inputText" name="inputText" rows="6" placeholder="Text to translate..."
+                                oninput="doTranslate()"></textarea>
+                            <button style="display: none" class="clear-btn btn" id="clear-btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                            <button disabled class="poly-btn btn disabled">
+                                <i class="fa fa-volume-up text-light"></i>
+                            </button>
+                            <div class="group-btn">
+                                <!-- <button class="translate-btn btn">TRANSLATE</button> -->
+                                <button class="btn upload-btn" id="upload">
+                                    <i class="fa fa-upload text-light"></i>
+                                </button>
+                                <button class="download-btn btn">
+                                    <i class="fa fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="right-side" style="background-color: #e9e9e9;">
+
+                        <div>
+                            <textarea disabled id="outputText" name="outputText" rows="6"
+                                placeholder="Translated text..."></textarea>
+                            <button disabled class="poly-btn btn disabled"><i class="fa fa-volume-up text-light"></i></button>
+                            <div class="group-btn">
+                                <button class="download-btn btn">
+                                    <i class="fa fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./loadLang.js"></script>
+    <script>
+        function doTranslate() {
+            // var inputText = document.getElementById('inputText')
+            var clear_btn = document.getElementById('clear-btn');
+            const poly_btn = document.getElementsByClassName('poly-btn');
+            const textarea = document.querySelectorAll('textarea');
+            textarea[1].value = textarea[0].value;
+
+            if (textarea[0].value) {
+                clear_btn.style.display = "block";
+                
+                
+                for(let i = 0 ;i < poly_btn.length ;i++){
+                    poly_btn[i].removeAttribute('disabled')
+                    poly_btn[i].classList.remove('disabled')
+                }
+            } else if (!textarea[0].value) {
+                clear_btn.style.display = "none";
+                
+                
+                for(let i = 0 ;i < poly_btn.length ;i++){
+                    poly_btn[i].setAttribute('disabled','disabled')
+                    poly_btn[i].classList.add('disabled')
+                }
+
+                textarea[0].rows = 6;
+                textarea[1].rows = 6;
+            }
+
+            if (textarea[0].offsetHeight < textarea[0].scrollHeight) {
+                textarea[0].rows = textarea[0].rows + 1;
+                textarea[1].rows = textarea[1].rows + 1;
+
+            }
+        }
+    </script>
+    <script>
+        // console.log(clear_btn)
+
+    </script>
+</body>
+
+</html>

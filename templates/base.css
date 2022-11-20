@@ -1,0 +1,280 @@
+:root{
+    --color-btn: -webkit-linear-gradient(left, #86abe7, #1c6beb)
+    /* --box-shadow: rgb(0 0 0 / 20%) 0px 1px 6px 2px; */
+}
+*{
+    box-sizing: inherit;
+    /* kế thừa từ thẻ chứa nó */
+    /* margin: 0;
+    padding: 0; */
+    transition: 0.125s;
+    animation: fadeIn ease 0.2s;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    /* gọi là HACK thích thì xài ko thích thì xài */
+    font-size: 62.5%;
+    line-height: 1.6rem; 
+    /* => kết hợp với font-size 62,5% thì sẽ ra 16px */
+    /* font-family: 'Inter Tight', sans-serif;
+     */
+    /* font-family: mallory,Helvetica Neue,Helvetica,Arial,sans-serif; */
+    font-family: kite-mallory, "Helvetica Neue", Helvetica, Arial, sans-serif;;
+    box-sizing: border-box;
+    /* để tất cả các thẻ duco759 kế thừa từ inherit ở trên kết hợp với
+     border-box thì tất cả các thẻ sẽ được kế thừa thược tính border-box */
+    /* height: 600px; */
+    background-color: #f9f9f9;
+    /* height: 100%; */
+}
+/* body{ */
+    /* font-size: 100%; */
+/* } */
+a:hover{
+    opacity: 0.7;
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+/* i{
+    padding: 12px;
+} */
+.show{
+    z-index: 3;
+}
+@keyframes cartGrowth {
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+@keyframes dropDown {
+    from{
+        /* opacity: 0; */
+        transform: translateY(-50px);
+    }
+    to{
+        transform: translateY(0);
+        /* opacity: 1; */
+    }
+}
+/* i{
+    /* background-color: transparent;
+} */
+a{
+    cursor: pointer;
+}
+button{
+    cursor: pointer;
+}
+.fontWeight-500{
+    font-weight: 500;
+}
+.fontWeight-600{
+    font-weight: 600;
+}
+.fontWeight-700{
+    font-weight: 700;
+}
+.fontWeight-900{
+    font-weight: 900;
+}
+.padding-8{
+    padding: 8px;
+}
+.padding-12{
+    padding: 12px;
+}
+.padding-24{
+    padding: 24px;
+}
+.rgbRed-text{
+    color: rgb(207, 32, 97);
+}
+.semiRgbRed-text{
+    color: rgb(236, 139, 175);
+}
+.white-text{
+    color: #fff;
+}
+.blue-text{
+    color: #5392fa
+}
+.black-text{
+    color: #333;
+}
+.semiBlack-text{
+    color: rgb(132 132 132)
+}
+.gray-text{
+    color: #ccc;
+}
+.rgbRed-background{
+    background-color: rgb(207, 32, 97);
+}
+.green-background{
+    background-color: rgb(124, 207, 0);
+}
+.button-padding_12{
+    padding: 12px;
+}
+
+.blue-button{
+    border: none;
+    outline: none;
+    color: #f5fffe;
+    background-color: #5392fa;
+    border-radius: 5px;
+}
+.blue-button:hover{
+    /* opacity: 0.7; */
+    background-color: #83b0fa;
+}
+.blue-outline-button{
+    border: 1px solid #5392fa;
+    outline: none;
+    background-color: transparent;
+    border-radius: 5px;
+    color: #5392fa;
+}
+.blue-outline-button:hover{
+    color: #f5fffe;
+    background-color: #5392fa;
+    opacity: 0.6;
+}
+.rgbRedButton{
+    border: none;
+    outline: none;
+    color: #f5fffe;
+    background-color: rgb(207, 32, 97);    
+    border-radius: 5px;
+}
+.rgbRedButton:hover{
+    background-color: rgb(226, 89, 139);    
+
+}
+
+.rgbRed_OutlineButton{
+    border: 1px solid rgb(207, 32, 97);
+    outline: none;
+    background-color: transparent;
+    border-radius: 5px;
+    color: rgb(207, 32, 97);
+}
+.rgbRed_OutlineButton:hover{
+    background-color: rgb(226, 89, 139);    
+    color: #f5fffe;
+    opacity: 0.6;
+}
+
+
+.border-bar{
+    height: 55%;
+    width: 1.99px;
+    background-color: #ccc;
+    border-radius: 8px;
+}
+
+.custom_button{
+    appearance: none;
+    margin-right: 1.2rem;
+    background-color: #ccc;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rounded_button{
+    border-radius: 50%;
+    text-align: center;
+}
+.custom_button::after{
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 12px;
+    color: #f5fffe;
+
+    display: none;
+}
+.custom_button:hover{
+    background-color: rgb(131, 131, 131);
+    
+}
+.custom_button:checked{
+    background-color: #5392fa;
+}
+.custom_button:checked::after{
+    display: block;
+}
+
+.modal{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 1000;
+
+    display: none;
+
+}
+.modal.show{
+    display: block;
+}
+.modal-overlay{
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);
+    height: 100%;
+    width: 100%;
+    
+}
+.modal-body{
+    z-index: 100;
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-inner{
+    /* margin: auto; */
+    height: 90%;
+    width: 98%;
+    background-color: #f5fffe;
+    padding: 12px;
+}
+
+
+
+.status {
+    padding: 3px 4px;
+    color: #fff;
+    border-radius: 5px;
+}
+.status.checkedin{
+    background-color: #8de02c;
+}
+.status.notcheckedin{
+    background-color: rgb(207, 32, 97);
+}
