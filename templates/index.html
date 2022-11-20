@@ -59,6 +59,10 @@
                                 <button class="download-btn btn">
                                     <i class="fa fa-download"></i>
                                 </button>
+                                <button class="audio-btn btn" id="audio-btn">
+                                    Nghe
+                                </button>
+
                             </div>
                         </div>
                     </div>
@@ -68,7 +72,8 @@
                         <div>
                             <textarea disabled id="outputText" name="outputText" rows="6"
                                 placeholder="Translated text..."></textarea>
-                            <button disabled class="poly-btn btn disabled"><i class="fa fa-volume-up text-light"></i></button>
+                            <button disabled class="poly-btn btn disabled"><i
+                                    class="fa fa-volume-up text-light"></i></button>
                             <div class="group-btn">
                                 <button class="download-btn btn">
                                     <i class="fa fa-download"></i>
@@ -82,29 +87,54 @@
 
     </div>
 
-    <script src="./loadLang.js"></script>
+    <script src="./script/loadLang.js"></script>
+    <script src="./script/clearInput.js"></script>
+    <script src="./script/swapText.js"></script>
+    <script src="./script/speechTotext.js"></script>
     <script>
+        // document.getElementById('audio-btn').addEventListener('click', function () {
+        //     var speech = true;
+        //     window.SpeechRecognition = window.webkitSpeechRecognition;
+        //     const recognition = new SpeechRecognition();
+        //     recognition.interimResults = true;
+        //     recognition.addEventListener('result', t => {
+        //         const transcript = Array.from(t.results)
+        //             .map(result => result[0])
+        //             .map(result => result.transcript)
+        //         document.getElementById('inputText').value = transcript;
+
+        //     });
+        //     if (speech == true) {
+        //         recognition.start();
+        //     }
+        // })
+
+    </script>
+
+    <script>
+        document.getElementById("targetLanguageCodeDropdown").value = "vi";
+
+        var clear_btn = document.getElementById('clear-btn');
+        const poly_btn = document.getElementsByClassName('poly-btn');
+        const textarea = document.querySelectorAll('textarea');
         function doTranslate() {
             // var inputText = document.getElementById('inputText')
-            var clear_btn = document.getElementById('clear-btn');
-            const poly_btn = document.getElementsByClassName('poly-btn');
-            const textarea = document.querySelectorAll('textarea');
             textarea[1].value = textarea[0].value;
 
             if (textarea[0].value) {
                 clear_btn.style.display = "block";
-                
-                
-                for(let i = 0 ;i < poly_btn.length ;i++){
+
+
+                for (let i = 0; i < poly_btn.length; i++) {
                     poly_btn[i].removeAttribute('disabled')
                     poly_btn[i].classList.remove('disabled')
                 }
             } else if (!textarea[0].value) {
                 clear_btn.style.display = "none";
-                
-                
-                for(let i = 0 ;i < poly_btn.length ;i++){
-                    poly_btn[i].setAttribute('disabled','disabled')
+
+
+                for (let i = 0; i < poly_btn.length; i++) {
+                    poly_btn[i].setAttribute('disabled', 'disabled')
                     poly_btn[i].classList.add('disabled')
                 }
 

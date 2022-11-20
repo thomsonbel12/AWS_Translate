@@ -14,6 +14,7 @@
         selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
         selectDrop[1].innerHTML = opt;
 
+        selectDrop[1].value = 'vi'
         // const a = document.ge
         
     }).catch(e => {
