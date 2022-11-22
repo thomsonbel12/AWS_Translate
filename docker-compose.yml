@@ -2,7 +2,7 @@ version: "3"
 
 services:
   translate-app:
-    build: ./templates
+    build: ./aws-translate-app
     ports:
       - "8000:8000"
     network_mode: host
