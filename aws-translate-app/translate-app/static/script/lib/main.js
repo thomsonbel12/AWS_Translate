@@ -1,6 +1,6 @@
-const audioUtils        = require('./audioUtils');  // for encoding audio data as PCM
+const audioUtils        = require("{{ url_for('static',filename='script/lib/audioUtils') }}");  // for encoding audio data as PCM
 const crypto            = require('crypto'); // tot sign our pre-signed URL
-const v4                = require('./aws-signature-v4'); // to generate our pre-signed URL
+const v4                = require("{{ url_for('static',filename='script/lib/aws-signature-v4') }}"); // to generate our pre-signed URL
 const marshaller        = require("@aws-sdk/eventstream-marshaller"); // for converting binary event stream messages to and from JSON
 const util_utf8_node    = require("@aws-sdk/util-utf8-node"); // utilities for encoding and decoding UTF8
 const mic               = require('microphone-stream'); // collect microphone input as a stream of raw bytes
