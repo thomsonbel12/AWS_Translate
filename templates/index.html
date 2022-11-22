@@ -16,6 +16,7 @@
 
 <body>
     <div class="container">
+        
         <h1 class="rgbRed-text fontWeight-900 padding-12">TRANSLATE WEB</h1>
         <div class="sub-container">
             <div class="content">
@@ -59,10 +60,15 @@
                                 <button class="download-btn btn">
                                     <i class="fa fa-download"></i>
                                 </button>
-                                <button class="audio-btn btn" id="audio-btn">
+                                <button class="audio-btn btn" id="audio-btn" style="font-size: 12px;">
                                     Nghe
                                 </button>
-
+                                <button id="start-button" class="button-xl btn" title="Start Transcription">
+                                    <i class="fa fa-microphone"></i>
+                                </button>
+                                <button id="stop-button" class="button-xl btn" title="Stop Transcription" disabled="true"><i
+                                        class="fa fa-stop-circle"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -81,16 +87,19 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
-
+        <div id="error" class="isa_error"></div>
     </div>
 
     <script src="./script/loadLang.js"></script>
     <script src="./script/clearInput.js"></script>
     <script src="./script/swapText.js"></script>
     <script src="./script/speechTotext.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="dist/main.js"></script>
     <script>
         // document.getElementById('audio-btn').addEventListener('click', function () {
         //     var speech = true;

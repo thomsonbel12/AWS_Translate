@@ -174,7 +174,12 @@
     margin-left: 10px;
 
 }
-
+.isa_error{
+    color: red;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    font-weight: 700;
+}
 
 
 textarea{
