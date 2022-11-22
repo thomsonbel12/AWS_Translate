@@ -1,0 +1,304 @@
+{
+    "language": [
+        {
+            "value": "af",
+            "name": "Afrikaans"
+        },
+        {
+            "value": "sq",
+            "name": "Albanian"
+        },
+        {
+            "value": "am",
+            "name": "Amharic"
+        },
+        {
+            "value": "ar",
+            "name": "Arabic*"
+        },
+        {
+            "value": "hy",
+            "name": "Armenian"
+        },
+        {
+            "value": "az",
+            "name": "Azerbaijani"
+        },
+        {
+            "value": "bn",
+            "name": "Afrikaans"
+        },
+        {
+            "value": "bs",
+            "name": "Bosnian"
+        },
+        {
+            "value": "bg",
+            "name": "Bulgarian"
+        },
+        {
+            "value": "ca",
+            "name": "Catalan"
+        },
+        {
+            "value": "zh",
+            "name": "Chinese (Simplified)*"
+        },
+        {
+            "value": "zh-TW",
+            "name": "Chinese (Traditional)"
+        },
+        {
+            "value": "hr",
+            "name": "Croatian"
+        },
+        {
+            "value": "cs",
+            "name": "Czech"
+        },
+        {
+            "value": "da",
+            "name": "Danish*"
+        },
+        {
+            "value": "fa-AF",
+            "name": "Dari"
+        },
+        {
+            "value": "nl",
+            "name": "Dutch*"
+        },
+        {
+            "value": "en",
+            "name": "English*"
+        },
+        {
+            "value": "et",
+            "name": "Estonian"
+        },
+        {
+            "value": "fa",
+            "name": "Farsi (Persian)"
+        },
+        {
+            "value": "tl",
+            "name": "Filipino, Tagalog"
+        },
+        {
+            "value": "fi",
+            "name": "Finnish"
+        },
+        {
+            "value": "fr",
+            "name": "French*"
+        },
+        {
+            "value": "fr-CA",
+            "name": "French (Canada)"
+        },
+        {
+            "value": "ka",
+            "name": "Georgian"
+        },
+        {
+            "value": "de",
+            "name": "German"
+        },
+        {
+            "value": "el",
+            "name": "Greek"
+        },
+        {
+            "value": "gu",
+            "name": "Gujarati"
+        },
+        {
+            "value": "ht",
+            "name": "Haitian Creole"
+        },
+        {
+            "value": "ha",
+            "name": "Hausa"
+        },
+        {
+            "value": "he",
+            "name": "Hebrew"
+        },
+        {
+            "value": "hi",
+            "name": "Hindi"
+        },
+        {
+            "value": "hu",
+            "name": "Hungarian"
+        },
+        {
+            "value": "is",
+            "name": "Icelandic"
+        },
+        {
+            "value": "id",
+            "name": "Indonesian"
+        },
+        {
+            "value": "ga",
+            "name": "Irish"
+        },
+        {
+            "value": "it",
+            "name": "Italian"
+        },
+        {
+            "value": "ja",
+            "name": "Japanese*"
+        },
+        {
+            "value": "kn",
+            "name": "Kannada"
+        },
+        {
+            "value": "kk",
+            "name": "Kazakh"
+        },
+        {
+            "value": "ko",
+            "name": "Korean*"
+        },
+        {
+            "value": "lv",
+            "name": "Latvian"
+        },
+        {
+            "value": "lt",
+            "name": "Lithuanian"
+        },
+        {
+            "value": "mk",
+            "name": "Macedonian"
+        },
+        {
+            "value": "ms",
+            "name": "Malay"
+        },
+        {
+            "value": "ml",
+            "name": "Malayalam"
+        },
+        {
+            "value": "mt",
+            "name": "Maltese"
+        },
+        {
+            "value": "mr",
+            "name": "Marathi"
+        },
+        {
+            "value": "mn",
+            "name": "Mongolian"
+        },
+        {
+            "value": "no",
+            "name": "Norwegian"
+        },
+        {
+            "value": "ps",
+            "name": "Pashto"
+        },
+        {
+            "value": "pl",
+            "name": "Polish"
+        },
+        {
+            "value": "pt",
+            "name": "Portuguese*"
+        },
+        {
+            "value": "pt-PT",
+            "name": "Portuguese (Portugal)"
+        },
+        {
+            "value": "pa",
+            "name": "Punjabi"
+        },
+        {
+            "value": "ro",
+            "name": "Romanian"
+        },
+        {
+            "value": "ru",
+            "name": "Russian*"
+        },
+        {
+            "value": "sr",
+            "name": "Serbian"
+        },
+        {
+            "value": "si",
+            "name": "Sinhala"
+        },
+        {
+            "value": "sk",
+            "name": "Slovak"
+        },
+        {
+            "value": "sl",
+            "name": "Slovenian"
+        },
+        {
+            "value": "so",
+            "name": "Somali"
+        },
+        {
+            "value": "es",
+            "name": "Spanish*"
+        },
+        {
+            "value": "es-MX",
+            "name": "Spanish (Mexico)"
+        },
+        {
+            "value": "sw",
+            "name": "Swahili"
+        },
+        {
+            "value": "sv",
+            "name": "Swedish"
+        },
+        {
+            "value": "ta",
+            "name": "Tamil"
+        },
+        {
+            "value": "te",
+            "name": "Telugu"
+        },
+        {
+            "value": "th",
+            "name": "Thai"
+        },
+        {
+            "value": "tr",
+            "name": "Turkish"
+        },
+        {
+            "value": "uk",
+            "name": "Ukrainian"
+        },
+        {
+            "value": "ur",
+            "name": "Urdu"
+        },
+        {
+            "value": "uz",
+            "name": "Uzbek"
+        },
+        {
+            "value": "vi",
+            "name": "Vietnamese"
+        },
+        {
+            "value": "cy",
+            "name": "Welsh"
+        }
+    ]
+}
