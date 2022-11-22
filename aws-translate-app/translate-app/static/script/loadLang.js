@@ -1,6 +1,6 @@
 // document.addEventListener('DOMContentLoaded', () => {
     const selectDrop = document.getElementsByClassName('form-select');
-
+    // import {} from ""
     fetch('./language.json').then(res => {
         return res.json();
     }).then(data => {

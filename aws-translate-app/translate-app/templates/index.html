@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./base.css">
+    <!-- <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./base.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -642,13 +642,17 @@
         </div>
         <div id="error" class="isa_error"></div>
     </div>
-
-    <script src="./script/loadLang.js"></script>
-    <script src="./script/clearInput.js"></script>
-    <script src="./script/swapText.js"></script>
-    <script src="./script/speechTotext.js"></script>
+    <!-- <script src="{{ url_for('static',filename='script/loadLang.js') }}"> </script> -->
+    <script src="{{ url_for('static',filename='script/clearInput.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/swapText.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/speechTotext.js') }}"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="dist/main.js"></script>
+    <script src="{{ url_for('static',filename='script/dist/main.js') }}"> </script>
+    <!-- <script src="./script/loadLang.js"></script> -->
+    <!-- <script src="./script/clearInput.js"></script> -->
+    <!-- <script src="./script/swapText.js"></script> -->
+    <!-- <script src="./script/speechTotext.js"></script> -->
+    <!-- <script src="dist/main.js"></script> -->
     <script>
         // document.getElementById('audio-btn').addEventListener('click', function () {
         //     var speech = true;
@@ -709,7 +713,27 @@
     </script>
     <script>
         // console.log(clear_btn)
+        const selectDrop = document.getElementsByClassName('form-select');
+    // import {} from "./"
+    fetch("{{ url_for('static',filename='language.json') }}").then(res => {
+        return res.json();
+    }).then(data => {
+        let opt = "";
+        // console.log(data.language[0].name)
+        data.language.forEach(country => {
+            opt += `<option id=${country.value} value=${country.value}>${country.name}</option>`;
+            // console.log(country.cca2);
+        });
 
+        selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
+        selectDrop[1].innerHTML = opt;
+
+        selectDrop[1].value = 'vi'
+        // const a = document.ge
+        
+    }).catch(e => {
+        console.log(e);
+    });
     </script>
 </body>
 
