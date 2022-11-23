@@ -7,13 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./base.css"> -->
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/base.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1048.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Translate Web</title>
-    
+
 </head>
 
 <body>
@@ -125,7 +128,14 @@
         // })
 
     </script>
+    <script>
+        AWS.config.region = 'us-east-1'; // Region
+        AWS.config.credentials = new AWS.Credentials("AKIA3EF5X6Z7YRIACMFL", "Co5aCB0V6+5G6qoODh/nFK23DysRPzVmD8BzmwHE");
 
+        var translate = new AWS.Translate({ region: AWS.config.region });
+        var polly = new AWS.Polly();
+        var s3 = new AWS.S3();
+    </script>
     <script>
         document.getElementById("targetLanguageCodeDropdown").value = "vi";
 
@@ -134,23 +144,23 @@
         const textarea = document.querySelectorAll('textarea');
         function doTranslate() {
             // var inputText = document.getElementById('inputText')
-            textarea[1].value = textarea[0].value;
+            // textarea[1].value = textarea[0].value;
 
             if (textarea[0].value) {
                 clear_btn.style.display = "block";
 
 
                 for (let i = 0; i < poly_btn.length; i++) {
-                    poly_btn[i].removeAttribute('disabled')
-                    poly_btn[i].classList.remove('disabled')
+                    poly_btn[i].removeAttribute('disabled');
+                    poly_btn[i].classList.remove('disabled');
                 }
             } else if (!textarea[0].value) {
                 clear_btn.style.display = "none";
 
 
                 for (let i = 0; i < poly_btn.length; i++) {
-                    poly_btn[i].setAttribute('disabled', 'disabled')
-                    poly_btn[i].classList.add('disabled')
+                    poly_btn[i].setAttribute('disabled', 'disabled');
+                    poly_btn[i].classList.add('disabled');
                 }
 
                 textarea[0].rows = 6;
@@ -162,31 +172,70 @@
                 textarea[1].rows = textarea[1].rows + 1;
 
             }
+
+
+            var inputText = document.getElementById('inputText').value;
+            if (!inputText) {
+                alert("Vui lòng nhập văn bản bạn muốn dịch");
+                exit();
+            }
+
+            // get the language codes
+            var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
+            var sourceLanguageCode = sourceDropdown.options[sourceDropdown.selectedIndex].value;
+
+            var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+            var targetLanguageCode = targetDropdown.options[targetDropdown.selectedIndex].value;
+
+            // var params = {
+
+            //     Text: inputText,
+            //     SourceLanguageCode: 'vi',
+            //     TargetLanguageCode: 'ja'
+            // };
+
+            var params = {
+
+                Text: inputText,
+                SourceLanguageCode: sourceLanguageCode,
+                TargetLanguageCode: targetLanguageCode
+            };
+            translate.translateText(params, function (err, data) {
+                if (err) {
+                    console.log(err, err.stack);
+                    alert("Error calling Amazon Translate. " + err.message);
+                    return;
+                }
+                if (data) {
+                    var outputTextArea = document.getElementById('outputText');
+                    outputTextArea.value = data.TranslatedText;
+                }
+            });
         }
     </script>
     <script>
         // console.log(clear_btn)
         const selectDrop = document.getElementsByClassName('form-select');
-    // import {} from "./"
-    fetch("{{ url_for('static',filename='language.json') }}").then(res => {
-        return res.json();
-    }).then(data => {
-        let opt = "";
-        // console.log(data.language[0].name)
-        data.language.forEach(country => {
-            opt += `<option id=${country.value} value=${country.value}>${country.name}</option>`;
-            // console.log(country.cca2);
+        // import {} from "./"
+        fetch("{{ url_for('static',filename='language.json') }}").then(res => {
+            return res.json();
+        }).then(data => {
+            let opt = "";
+            // console.log(data.language[0].name)
+            data.language.forEach(country => {
+                opt += `<option id=${country.value} value=${country.value}>${country.name}</option>`;
+                // console.log(country.cca2);
+            });
+
+            selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
+            selectDrop[1].innerHTML = opt;
+
+            selectDrop[1].value = 'vi';
+            // const a = document.ge
+
+        }).catch(e => {
+            console.log(e);
         });
-
-        selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
-        selectDrop[1].innerHTML = opt;
-
-        selectDrop[1].value = 'vi'
-        // const a = document.ge
-        
-    }).catch(e => {
-        console.log(e);
-    });
     </script>
 </body>
 
