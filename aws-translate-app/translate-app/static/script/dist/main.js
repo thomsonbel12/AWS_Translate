@@ -165,7 +165,7 @@
     (function (Buffer) {
       "use strict";
 
-      var audioUtils = require('./lib/audioUtils'); // for encoding audio data as PCM
+      var audioUtils = require('./audioUtils'); // for encoding audio data as PCM
 
 
       var crypto = require('crypto'); // tot sign our pre-signed URL
