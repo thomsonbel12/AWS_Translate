@@ -4,7 +4,7 @@ function swapText() {
     let outputText = document.getElementById('outputText').value;
 
     document.getElementById('inputText').value = outputText;
-    document.getElementById('outputText').value = inputText;
+    // document.getElementById('outputText').value = inputText;
 
     let source = document.getElementById("sourceLanguageCodeDropdown").value;
     let target = document.getElementById("targetLanguageCodeDropdown").value;
@@ -14,6 +14,7 @@ function swapText() {
     }
     document.getElementById("sourceLanguageCodeDropdown").value = target;
     document.getElementById("targetLanguageCodeDropdown").value = source;
+    doTranslate()
 }
 
 document.querySelector('button.swap').addEventListener('click', swapText)

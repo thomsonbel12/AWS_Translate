@@ -132,9 +132,9 @@
         query['X-Amz-Expires'] = options.expires;
         query['X-Amz-SignedHeaders'] = exports.createSignedHeaders(options.headers);
 
-        if (options.sessionToken) {
-          query['X-Amz-Security-Token'] = options.sessionToken;
-        }
+        // if (options.sessionToken) {
+        //   query['X-Amz-Security-Token'] = options.sessionToken;
+        // }
 
         var canonicalRequest = exports.createCanonicalRequest(method, path, query, options.headers, payload);
         var stringToSign = exports.createStringToSign(options.timestamp, options.region, service, canonicalRequest);
@@ -17423,9 +17423,9 @@
 
   }, { "browserify-cipher": 50, "browserify-sign": 58, "browserify-sign/algos": 55, "create-ecdh": 82, "create-hash": 84, "create-hmac": 86, "diffie-hellman": 96, "pbkdf2": 165, "public-encrypt": 173, "randombytes": 181, "randomfill": 182 }], 89: [function (require, module, exports) {
     'use strict';
-    var token = '%[a-f0-9]{2}';
-    var singleMatcher = new RegExp(token, 'gi');
-    var multiMatcher = new RegExp('(' + token + ')+', 'gi');
+    // var token = '%[a-f0-9]{2}';
+    // var singleMatcher = new RegExp(token, 'gi');
+    // var multiMatcher = new RegExp('(' + token + ')+', 'gi');
 
     function decodeComponents(components, split) {
       try {
@@ -17448,21 +17448,21 @@
       return Array.prototype.concat.call([], decodeComponents(left), decodeComponents(right));
     }
 
-    function decode(input) {
-      try {
-        return decodeURIComponent(input);
-      } catch (err) {
-        var tokens = input.match(singleMatcher);
+    // function decode(input) {
+    //   try {
+    //     return decodeURIComponent(input);
+    //   } catch (err) {
+    //     var tokens = input.match(singleMatcher);
 
-        for (var i = 1; i < tokens.length; i++) {
-          input = decodeComponents(tokens, i).join('');
+    //     for (var i = 1; i < tokens.length; i++) {
+    //       input = decodeComponents(tokens, i).join('');
 
-          tokens = input.match(singleMatcher);
-        }
+    //       tokens = input.match(singleMatcher);
+    //     }
 
-        return input;
-      }
-    }
+    //     return input;
+    //   }
+    // }
 
     function customDecodeURIComponent(input) {
       // Keep track of all the replacements and prefill the map with the `BOM`
