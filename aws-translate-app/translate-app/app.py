@@ -31,7 +31,7 @@ def main():
 
 @ app.route("/extracttext", methods=["POST"])
 def extractImage():
-    file = request.files.get("filename")
+    file = request.files.get("file_select")
     binaryFile = file.read()
     textractclient = client()
     response = textractclient.detect_document_text(

@@ -26,8 +26,12 @@ document.getElementsByClassName('upload-btn')[0].addEventListener('click', funct
     upload_imgs_container.classList.toggle('show');
 });
 
-function isFileImage(file) {
-    return file && file['type'].split('/')[0] === 'image';
+function isValidFile(file) {
+    // let x = 
+    let x = file && file['type'].split('/')[0];
+    // let x = file.split('.').pop();
+    console.log(x);
+    return x;
 }
 
 
@@ -35,15 +39,26 @@ input_img.addEventListener('change', function () {
     clearInputs();
 
     let file = input_img.files;
+    let x = 0;
     for (let i = 0; i < file.length; i++) {
         if (files.every(e => e.name !== file[i].name)) {
-            // if (isFileImage(file[i]))
-            files.push(file[i]);
+            // console
+            if (isValidFile(file[i]) === 'text') {
+                files.push(file[i]);
+                x = 1;
+            }else if(isValidFile(file[i]) === 'image'){
+                files.push(file[i]);
+                x = 2;
+            }
         }
     }
 
-    loadFileAsText();
+    if (x === 1)
+        loadFileAsText();
     // doTranslate();
+    else if(x === 2){
+        document.getElementById('submit_textract_btn').click()
+    }
     showImages();
 });
 

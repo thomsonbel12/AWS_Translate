@@ -104,18 +104,19 @@
                                 <p>Kéo & thả file của bạn vào khung dưới đây !</p>
                                 <!-- <button></button> -->
                             </div>
-                            <!-- <form action=""> -->
-                            <div class="add_img_form">
-                                <span class="text_inner">Kéo & thả file ở đây hoặc
-                                    <label for="img_select_btn" class="select fontWeight-600">Chọn
-                                        file
-                                    </label>
-                                </span>
-                                <!-- <input style="display: none;" type="file" name="file_select"
+                            <form action="/extracttext" method="post">
+                                <div class="add_img_form">
+                                    <span class="text_inner">Kéo & thả file ở đây hoặc
+                                        <label for="img_select_btn" class="select fontWeight-600">Chọn
+                                            file
+                                        </label>
+                                    </span>
+                                    <!-- <input style="display: none;" type="file" name="file_select"
                                     class="imgs_select"> -->
-                                <input id="img_select_btn" type="file" name="file_select" class="imgs_select">
-                            </div>
-                            <!-- </form> -->
+                                    <input id="img_select_btn" type="file" name="file_select" class="imgs_select">
+                                    <button style="display: none;" type="submit" class="" id="submit_textract_btn"></button>
+                                </div>
+                            </form>
 
                             <div class="imgs_container">
                                 <!-- <div class="img">
