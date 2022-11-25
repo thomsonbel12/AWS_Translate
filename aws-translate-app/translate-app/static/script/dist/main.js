@@ -353,6 +353,8 @@
               //scroll the textarea down
               $('#inputText').scrollTop($('#inputText')[0].scrollHeight);
               transcription += transcript + "\n";
+
+              doTranslate()
             }
           }
         }
