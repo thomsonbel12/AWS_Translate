@@ -281,7 +281,7 @@ function createPresignedUrl() {
         'transcribe',
         crypto.createHash('sha256').update('', 'utf8').digest('hex'), {
             'key': "AKIA3EF5X6Z75M4T3CP2",
-            'secret':"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",
+            'secret':"XPa7JiFxaKQ2jE3pLAT6x3mEHCnQV6/1OHFgQJMO",
             // 'sessionToken': $('#session_token').val(),
             'protocol': 'wss',
             'expires': 15,

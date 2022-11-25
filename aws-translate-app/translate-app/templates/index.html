@@ -96,45 +96,47 @@
                     </div>
 
                 </div>
+
+                <div class="bottom-side">
+                    <div class="upload_imgs_container">
+                        <div class="img_card">
+                            <div class="img_card_top">
+                                <p>Kéo & thả file của bạn vào khung dưới đây !</p>
+                                <!-- <button></button> -->
+                            </div>
+                            <!-- <form action=""> -->
+                            <div class="add_img_form">
+                                <span class="text_inner">Kéo & thả file ở đây hoặc
+                                    <label for="img_select_btn" class="select fontWeight-600">Chọn
+                                        file
+                                    </label>
+                                </span>
+                                <!-- <input style="display: none;" type="file" name="file_select"
+                                    class="imgs_select"> -->
+                                <input id="img_select_btn" type="file" name="file_select" class="imgs_select">
+                            </div>
+                            <!-- </form> -->
+
+                            <div class="imgs_container">
+                                <!-- <div class="img">
+                                    <img src="../assets/img/banner_1.png" alt="">
+                                    <span class="rgbRed-text delImgbtn" onclick="delImg(0)">&times;</span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="error" class="isa_error"></div>
     </div>
     <!-- <script src="{{ url_for('static',filename='script/loadLang.js') }}"> </script> -->
-    <script src="{{ url_for('static',filename='script/clearInput.js') }}"> </script>
-    <script src="{{ url_for('static',filename='script/swapText.js') }}"> </script>
-    <script src="{{ url_for('static',filename='script/speechTotext.js') }}"> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{{ url_for('static',filename='script/dist/main.js') }}"> </script>
-    <!-- <script src="./script/loadLang.js"></script> -->
-    <!-- <script src="./script/clearInput.js"></script> -->
-    <!-- <script src="./script/swapText.js"></script> -->
-    <!-- <script src="./script/speechTotext.js"></script> -->
-    <!-- <script src="dist/main.js"></script> -->
-    <script>
-        // document.getElementById('audio-btn').addEventListener('click', function () {
-        //     var speech = true;
-        //     window.SpeechRecognition = window.webkitSpeechRecognition;
-        //     const recognition = new SpeechRecognition();
-        //     recognition.interimResults = true;
-        //     recognition.addEventListener('result', t => {
-        //         const transcript = Array.from(t.results)
-        //             .map(result => result[0])
-        //             .map(result => result.transcript)
-        //         document.getElementById('inputText').value = transcript;
 
-        //     });
-        //     if (speech == true) {
-        //         recognition.start();
-        //     }
-        // })
-
-    </script>
     <script>
         document.getElementById("inputText").focus();
 
         AWS.config.region = 'us-east-1'; // Region
-        AWS.config.credentials = new AWS.Credentials("AKIA3EF5X6Z75M4T3CP2", "Y0o6wYv9oSl2YtF14tx9hj/B6bvSyw3RhqdoQhLK");
+        AWS.config.credentials = new AWS.Credentials("AKIAZ3L4IRM7FOM3A6H5", "XPa7JiFxaKQ2jE3pLAT6x3mEHCnQV6/1OHFgQJMO");
 
         var translate = new AWS.Translate({ region: AWS.config.region });
         var polly = new AWS.Polly();
@@ -183,8 +185,8 @@
 
             if (textarea[0].value || textarea[0].value != "") {
                 clear_btn.style.display = "block";
-                poly_btn[0].style.display = "block"
-                poly_btn[1].style.display = "block"
+                poly_btn[0].style.display = "block";
+                poly_btn[1].style.display = "block";
                 translate.translateText(params, function (err, data) {
                     if (err) {
                         console.log(err, err.stack);
@@ -206,8 +208,8 @@
                 clear_btn.style.display = "none";
 
 
-                poly_btn[0].style.display = "none"
-                poly_btn[1].style.display = "none"
+                poly_btn[0].style.display = "none";
+                poly_btn[1].style.display = "none";
 
                 textarea[0].rows = 6;
                 textarea[1].rows = 6;
@@ -255,7 +257,7 @@
             var sourceLanguageCode = document.getElementById("sourceLanguageCodeDropdown").value;
             doSynthesize(text, sourceLanguageCode);
         }
-        poly_btn[0].addEventListener('click', doSynthesizeInput)
+        poly_btn[0].addEventListener('click', doSynthesizeInput);
 
 
         function doSynthesizeOutput() {
@@ -266,7 +268,7 @@
             var targetLanguageCode = document.getElementById("targetLanguageCodeDropdown").value;
             doSynthesize(text, targetLanguageCode);
         }
-        poly_btn[1].addEventListener('click', doSynthesizeOutput)
+        poly_btn[1].addEventListener('click', doSynthesizeOutput);
 
         function doSynthesize(text, languageCode) {
             var voiceId;
@@ -341,9 +343,17 @@
     </script>
 
     <script>
-        document.getElementById("sourceLanguageCodeDropdown").addEventListener('change', doTranslate)
+        document.getElementById("sourceLanguageCodeDropdown").addEventListener('change', doTranslate);
         document.getElementById("targetLanguageCodeDropdown").addEventListener('change', doTranslate)
     </script>
+
+    <script src="{{ url_for('static',filename='script/clearInput.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/swapText.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/speechTotext.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/dist/main.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/loadFileAsText.js') }}"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </body>
 
 </html>
