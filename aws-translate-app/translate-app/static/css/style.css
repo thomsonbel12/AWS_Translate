@@ -297,17 +297,17 @@ textarea{
 .upload_imgs_container .imgs_container .img img{
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
-.upload_imgs_container .imgs_container .img span{
+.upload_imgs_container .imgs_container .img span:last-child{
     position: absolute;
     top: 4px;
     right: 4px;
     font-size: 32px;
     cursor: pointer;
-    color: #fff;
+    color: red;
 }
-.upload_imgs_container .imgs_container .img span:hover{
+.upload_imgs_container .imgs_container .img span:last-child:hover{
     color: #0b5ada;
 }

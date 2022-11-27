@@ -1,8 +1,8 @@
 from flask import render_template, Flask, request
 import boto3
 import json
-account_id = "AKIAZ3L4IRM7FOM3A6H5"
-account_key = "XPa7JiFxaKQ2jE3pLAT6x3mEHCnQV6/1OHFgQJMO"
+account_id = "AKIAUTP2CT7AAYERIVHJ"
+account_key = "Ao4B8MS7KUu0lVWHaAR7n4/VAZJVItwkAn1v4tXA"
 
 
 def client():
@@ -44,7 +44,7 @@ def extractImage():
         if block["BlockType"] == "LINE":
             extractedText = extractedText+block["Text"]+" "
     responseJson = {
-
+        
         "text": extractedText
     }
     print(responseJson)

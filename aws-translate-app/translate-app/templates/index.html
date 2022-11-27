@@ -50,8 +50,8 @@
 
                     <div class="left-side">
                         <div>
-                            <textarea id="inputText" name="inputText" rows="6" placeholder="Text to translate..."
-                                oninput="doTranslate()"></textarea>
+                            <textarea id="inputText" name="inputText" rows="6"
+                                placeholder="Text to translate..."></textarea>
                             <button style="display: none" class="clear-btn btn" id="clear-btn">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
@@ -104,7 +104,7 @@
                                 <p>Kéo & thả file của bạn vào khung dưới đây !</p>
                                 <!-- <button></button> -->
                             </div>
-                            <form action="/extracttext" method="post">
+                            <form action="/extracttext" method="post" enctype="multipart/form-data">
                                 <div class="add_img_form">
                                     <span class="text_inner">Kéo & thả file ở đây hoặc
                                         <label for="img_select_btn" class="select fontWeight-600">Chọn
@@ -114,7 +114,8 @@
                                     <!-- <input style="display: none;" type="file" name="file_select"
                                     class="imgs_select"> -->
                                     <input id="img_select_btn" type="file" name="file_select" class="imgs_select">
-                                    <button style="display: none;" type="submit" class="" id="submit_textract_btn"></button>
+                                    <button style="display: none;" type="submit" class=""
+                                        id="submit_textract_btn"></button>
                                 </div>
                             </form>
 
@@ -134,17 +135,42 @@
     <!-- <script src="{{ url_for('static',filename='script/loadLang.js') }}"> </script> -->
 
     <script>
+        // console.log(clear_btn)
+        const selectDrop = document.getElementsByClassName('form-select');
+        // import {} from "./"
+        fetch("{{ url_for('static',filename='language.json') }}").then(res => {
+            return res.json();
+        }).then(data => {
+            let opt = "";
+            // console.log(data.language[0].name)
+            data.language.forEach(country => {
+                opt += `<option id=${country.value} value=${country.value}>${country.name}</option>`;
+                // console.log(country.cca2);
+            });
+
+            selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
+            selectDrop[1].innerHTML = opt;
+
+            selectDrop[1].value = 'vi';
+            // const a = document.ge
+            // console.log(opt)
+        }).catch(e => {
+            console.log(e);
+        });
+    </script>
+
+    <script>
         document.getElementById("inputText").focus();
 
         AWS.config.region = 'us-east-1'; // Region
-        AWS.config.credentials = new AWS.Credentials("AKIAZ3L4IRM7FOM3A6H5", "XPa7JiFxaKQ2jE3pLAT6x3mEHCnQV6/1OHFgQJMO");
+        AWS.config.credentials = new AWS.Credentials("AKIAUTP2CT7AAYERIVHJ", "Ao4B8MS7KUu0lVWHaAR7n4/VAZJVItwkAn1v4tXA");
 
         var translate = new AWS.Translate({ region: AWS.config.region });
         var polly = new AWS.Polly();
         var s3 = new AWS.S3();
     </script>
     <script>
-        document.getElementById("targetLanguageCodeDropdown").value = "vi";
+        // document.getElementById("targetLanguageCodeDropdown").value = "vi";
 
         var clear_btn = document.getElementById('clear-btn');
         const poly_btn = document.getElementsByClassName('poly-btn');
@@ -164,12 +190,17 @@
             // }
 
             // get the language codes
-            var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
-            var sourceLanguageCode = sourceDropdown.options[sourceDropdown.selectedIndex].value;
-
-            var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
-            var targetLanguageCode = targetDropdown.options[targetDropdown.selectedIndex].value;
-
+            // var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
+            // selectDrop[0]
+            // var sourceLanguageCode = sourceDropdown.options[sourceDropdown.selectedIndex].value;
+            // var sourceLanguageCode = 0;
+            // var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
+            // console.log(targetDropdown);
+            // var targetLanguageCode = 10;
+            // var targetLanguageCode = targetDropdown.options[targetDropdown.selectedIndex].value;
+            var sourceLanguageCode = selectDrop[0].value;
+            console.log(sourceLanguageCode);
+            var targetLanguageCode = selectDrop[1].value;
             // var params = {
 
             //     Text: inputText,
@@ -223,31 +254,10 @@
             }
 
         }
+
+        document.getElementById('inputText').addEventListener('input', doTranslate)
     </script>
-    <script>
-        // console.log(clear_btn)
-        const selectDrop = document.getElementsByClassName('form-select');
-        // import {} from "./"
-        fetch("{{ url_for('static',filename='language.json') }}").then(res => {
-            return res.json();
-        }).then(data => {
-            let opt = "";
-            // console.log(data.language[0].name)
-            data.language.forEach(country => {
-                opt += `<option id=${country.value} value=${country.value}>${country.name}</option>`;
-                // console.log(country.cca2);
-            });
 
-            selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
-            selectDrop[1].innerHTML = opt;
-
-            selectDrop[1].value = 'vi';
-            // const a = document.ge
-
-        }).catch(e => {
-            console.log(e);
-        });
-    </script>
 
     <script>
         function doSynthesizeInput() {
@@ -348,11 +358,26 @@
         document.getElementById("targetLanguageCodeDropdown").addEventListener('change', doTranslate)
     </script>
 
+    <p style="display: none;" id="data_extract">{{jsonData}}</p>
+    <script>
+        let data = document.getElementById('data_extract').innerHTML;
+        let dataFromApi = JSON.parse(data);
+        let value = dataFromApi.text;
+        // console.log("value json test=", data);
+        document.getElementById('inputText').value = value;
+
+        doTranslate();
+    </script>
+
     <script src="{{ url_for('static',filename='script/clearInput.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/swapText.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/speechTotext.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/dist/main.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/loadFileAsText.js') }}"> </script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.1.9/docxtemplater.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.6.1/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
