@@ -151,6 +151,7 @@
     font-size: 18px;
 
     /* margin-right: 10px; */
+    margin: 0 5px;
 }
 .btn.disabled:hover{
     background-color: rgb(244, 244, 244) !important;
@@ -312,4 +313,13 @@ textarea{
 }
 .upload_imgs_container .imgs_container .img span:last-child:hover{
     color: #0b5ada;
+}
+
+
+.bottom-side{
+    display: flex;
+    
+}
+.bottom-side > div{
+    width: 50%;
 }

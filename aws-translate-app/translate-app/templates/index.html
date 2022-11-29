@@ -60,7 +60,6 @@
                                 <i class="fa fa-volume-up text-light"></i>
                             </button>
                             <div class="group-btn">
-                                <!-- <button class="translate-btn btn">TRANSLATE</button> -->
                                 <button class="btn upload-btn" id="upload">
                                     <i class="fa fa-upload text-light"></i>
                                 </button>
@@ -105,7 +104,6 @@
                         <div class="img_card">
                             <div class="img_card_top">
                                 <p>Kéo & thả file của bạn vào khung dưới đây !</p>
-                                <!-- <button></button> -->
                             </div>
                             <form action="/extracttext" method="post" enctype="multipart/form-data">
                                 <div class="add_img_form">
@@ -114,8 +112,7 @@
                                             file
                                         </label>
                                     </span>
-                                    <!-- <input style="display: none;" type="file" name="file_select"
-                                    class="imgs_select"> -->
+                                    
                                     <input id="img_select_btn" type="file" name="file_select" class="imgs_select">
                                     <button style="display: none;" type="submit" class=""
                                         id="submit_textract_btn"></button>
@@ -135,31 +132,29 @@
         </div>
         <div id="error" class="isa_error"></div>
     </div>
-    <!-- <script src="{{ url_for('static',filename='script/loadLang.js') }}"> </script> -->
 
     <script>
-        // console.log(clear_btn)
+        
+
         const selectDrop = document.getElementsByClassName('form-select');
-        // import {} from "./"
-        fetch("{{ url_for('static',filename='language.json') }}").then(res => {
-            return res.json();
-        }).then(data => {
-            let opt = "";
-            // console.log(data.language[0].name)
-            data.language.forEach(country => {
-                opt += `<option id=${country.value} value=${country.value}>${country.name}</option>`;
-                // console.log(country.cca2);
+        function loadLang() {
+            fetch("{{ url_for('static',filename='language.json') }}").then(res => {
+                return res.json();
+            }).then(data => {
+                let opt = "";
+                data.language.forEach(country => {
+                    opt += `<option id=${country.value} value=${country.value}>${country.name}</option>`;
+                });
+
+                selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
+                selectDrop[1].innerHTML = opt;
+
+                selectDrop[1].value = 'vi';
+            
+            }).catch(e => {
+                console.log(e);
             });
-
-            selectDrop[0].innerHTML = `<option value='auto'>Auto</option>` + opt;
-            selectDrop[1].innerHTML = opt;
-
-            selectDrop[1].value = 'vi';
-            // const a = document.ge
-            // console.log(opt)
-        }).catch(e => {
-            console.log(e);
-        });
+        }
     </script>
 
     <script>
@@ -171,46 +166,28 @@
         var translate = new AWS.Translate({ region: AWS.config.region });
         var polly = new AWS.Polly();
         var s3 = new AWS.S3();
+
+        selectDrop[0].value = 'auto';
+        selectDrop[1].value = 'vi'
+
+
     </script>
     <script>
-        // document.getElementById("targetLanguageCodeDropdown").value = "vi";
 
         var clear_btn = document.getElementById('clear-btn');
         var copy_btn = document.getElementById('copy-btn');
         const poly_btn = document.getElementsByClassName('poly-btn');
         const textarea = document.querySelectorAll('textarea');
 
+        let sourceLanguageCode = 'auto';
+        let targetLanguageCode = 'vi';
 
         function doTranslate() {
-            // var inputText = document.getElementById('inputText')
-            // textarea[1].value = textarea[0].value;
-
-
-
             var inputText = document.getElementById('inputText').value;
-            // if (!inputText) {
-            //     alert("Vui lòng nhập văn bản bạn muốn dịch");
-            //     exit();
-            // }
-
-            // get the language codes
-            // var sourceDropdown = document.getElementById("sourceLanguageCodeDropdown");
-            // selectDrop[0]
-            // var sourceLanguageCode = sourceDropdown.options[sourceDropdown.selectedIndex].value;
-            // var sourceLanguageCode = 0;
-            // var targetDropdown = document.getElementById("targetLanguageCodeDropdown");
-            // console.log(targetDropdown);
-            // var targetLanguageCode = 10;
-            // var targetLanguageCode = targetDropdown.options[targetDropdown.selectedIndex].value;
+            
             var sourceLanguageCode = selectDrop[0].value;
-            console.log(sourceLanguageCode);
             var targetLanguageCode = selectDrop[1].value;
-            // var params = {
-
-            //     Text: inputText,
-            //     SourceLanguageCode: 'vi',
-            //     TargetLanguageCode: 'ja'
-            // };
+        
 
             var params = {
 
@@ -237,10 +214,6 @@
                 });
 
 
-                // for (let i = 0; i < poly_btn.length; i++) {
-                //     poly_btn[i].removeAttribute('disabled');
-                //     poly_btn[i].classList.remove('disabled');
-                // }
             } else if (!textarea[0].value) {
                 clear_btn.style.display = "none";
                 copy_btn.style.display = "none";
@@ -248,9 +221,7 @@
                 poly_btn[0].style.display = "none";
                 poly_btn[1].style.display = "none";
 
-                // textarea[0].value = "";
-                // textarea[1].value = "";
-                clearInputs();
+                textarea[1].value = "";
 
                 textarea[0].rows = 6;
                 textarea[1].rows = 6;
@@ -264,7 +235,8 @@
 
         }
 
-        document.getElementById('inputText').addEventListener('input', doTranslate)
+        document.getElementById('inputText').addEventListener('input', doTranslate);
+        document.getElementById('inputText').addEventListener('change', doTranslate)
     </script>
 
 
@@ -369,21 +341,21 @@
 
     <p style="display: none;" id="data_extract">{{jsonData}}</p>
     <script>
+        
         let data = document.getElementById('data_extract').innerHTML;
         let dataFromApi = JSON.parse(data);
         let value = dataFromApi.text;
-        // console.log("value json test=", data);
+        loadLang();
         document.getElementById('inputText').value = value;
-
-        doTranslate();
+        
     </script>
 
     <script src="{{ url_for('static',filename='script/clearInput.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/swapText.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/speechTotext.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/dist/main.js') }}"> </script>
-    <script src="{{ url_for('static',filename='script/copyText.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/loadFileAsText.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/copyText.js') }}"> </script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.1.9/docxtemplater.js"></script>
