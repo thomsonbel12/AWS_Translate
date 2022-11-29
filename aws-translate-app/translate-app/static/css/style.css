@@ -112,7 +112,9 @@
     bottom: 76px;
     left: 24px;
 }
-.clear-btn{
+
+.clear-btn,
+.copy-btn{
     position: absolute;
     right: 6px;
     top: 15px;

@@ -85,6 +85,9 @@
                         <div>
                             <textarea disabled id="outputText" name="outputText" rows="6"
                                 placeholder="Translated text..."></textarea>
+                            <button style="display: none" class="btn copy-btn" id="copy-btn">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
                             <button style="display: none" class="poly-btn btn disabled"><i
                                     class="fa fa-volume-up text-light"></i></button>
                             <div class="group-btn">
@@ -173,6 +176,7 @@
         // document.getElementById("targetLanguageCodeDropdown").value = "vi";
 
         var clear_btn = document.getElementById('clear-btn');
+        var copy_btn = document.getElementById('copy-btn');
         const poly_btn = document.getElementsByClassName('poly-btn');
         const textarea = document.querySelectorAll('textarea');
 
@@ -217,6 +221,7 @@
 
             if (textarea[0].value || textarea[0].value != "") {
                 clear_btn.style.display = "block";
+                copy_btn.style.display = "block";
                 poly_btn[0].style.display = "block";
                 poly_btn[1].style.display = "block";
                 translate.translateText(params, function (err, data) {
@@ -238,10 +243,14 @@
                 // }
             } else if (!textarea[0].value) {
                 clear_btn.style.display = "none";
-
+                copy_btn.style.display = "none";
 
                 poly_btn[0].style.display = "none";
                 poly_btn[1].style.display = "none";
+
+                // textarea[0].value = "";
+                // textarea[1].value = "";
+                clearInputs();
 
                 textarea[0].rows = 6;
                 textarea[1].rows = 6;
@@ -373,9 +382,10 @@
     <script src="{{ url_for('static',filename='script/swapText.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/speechTotext.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/dist/main.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/copyText.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/loadFileAsText.js') }}"> </script>
 
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.1.9/docxtemplater.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.6.1/jszip.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
