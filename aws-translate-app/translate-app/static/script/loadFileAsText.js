@@ -40,10 +40,7 @@ function readDocxFile() {
     };
     reader.readAsBinaryString(fileToLoad[0]);
 }
-document.getElementsByClassName('upload-btn')[0].addEventListener('click', function () {
-    var upload_imgs_container = document.querySelector('.upload_imgs_container');
-    upload_imgs_container.classList.toggle('show');
-});
+
 
 function isValidFile(file) {
     // let x = 

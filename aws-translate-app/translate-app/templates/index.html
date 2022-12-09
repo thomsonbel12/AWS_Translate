@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./base.css"> -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/base.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -63,9 +63,9 @@
                                 <button class="btn upload-btn" id="upload">
                                     <i class="fa fa-upload text-light"></i>
                                 </button>
-                                <button class="download-btn btn">
+                                <!-- <button class="download-btn btn">
                                     <i class="fa fa-download"></i>
-                                </button>
+                                </button> -->
                                 <button class="audio-btn btn" id="audio-btn" style="font-size: 12px;">
                                     Nghe
                                 </button>
@@ -90,11 +90,13 @@
                             <button style="display: none" class="poly-btn btn disabled"><i
                                     class="fa fa-volume-up text-light"></i></button>
                             <div class="group-btn">
-                                <button class="download-btn btn">
+                                <button class="download-btn btn" id="download">
                                     <i class="fa fa-download"></i>
                                 </button>
                             </div>
                         </div>
+
+
                     </div>
 
                 </div>
@@ -112,7 +114,7 @@
                                             file
                                         </label>
                                     </span>
-                                    
+
                                     <input id="img_select_btn" type="file" name="file_select" class="imgs_select">
                                     <button style="display: none;" type="submit" class=""
                                         id="submit_textract_btn"></button>
@@ -127,6 +129,41 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="download_file_select">
+                        <div class="download_card">
+                            <div class="download_card_top">
+                                <p style="font-size: 18px;">Tải File được dịch tại đây</p>
+                            </div>
+                            <div style="background-color: #eefefd; border: 1px solid; border-radius: 3px; padding:8px"
+                                class="download_card_body">
+                                <div>
+                                    <div style="font-size: 16px; width: 50%;">
+                                        <label class="download_item_container" for="downloadFile_name">
+                                            <p>Tên File :</p>
+                                            <input id="downloadFile_name" type="text"
+                                                placeholder="Đặt tên file của bạn..."
+                                                style="border-radius: 3px; padding: 6px;">
+                                        </label>
+                                        <div class="download_item_container"
+                                            style="margin-top: 12px; border-radius: 3px;">
+                                            Định dạng file :
+                                            <select id="selectFile_Type" style="border-radius: 3px; padding: 6px;">
+                                                <option value="text/plain">Text (.txt)</option>
+                                                <option value="application/msword">Word (.docx)</option>
+                                                <option value="text/html">HTML File (.html)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="btns" style="font-size: 16px; width: 25%; margin-left: 88px;">
+                                        <button id="downloadFile" class="blue-button" style=" padding: 18px;">Tải
+                                            về</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,8 +171,6 @@
     </div>
 
     <script>
-        
-
         const selectDrop = document.getElementsByClassName('form-select');
         function loadLang() {
             fetch("{{ url_for('static',filename='language.json') }}").then(res => {
@@ -150,7 +185,7 @@
                 selectDrop[1].innerHTML = opt;
 
                 selectDrop[1].value = 'vi';
-            
+
             }).catch(e => {
                 console.log(e);
             });
@@ -161,7 +196,7 @@
         document.getElementById("inputText").focus();
 
         AWS.config.region = 'us-east-1'; // Region
-        AWS.config.credentials = new AWS.Credentials("AKIAUTP2CT7AAYERIVHJ", "Ao4B8MS7KUu0lVWHaAR7n4/VAZJVItwkAn1v4tXA");
+        AWS.config.credentials = new AWS.Credentials("AKIAYTOWXMDS7HLSJNXL", "t1T7sFYKOZVLGAynLoasQZdxGR3Awl+UNJ4cPDbl");
 
         var translate = new AWS.Translate({ region: AWS.config.region });
         var polly = new AWS.Polly();
@@ -184,10 +219,10 @@
 
         function doTranslate() {
             var inputText = document.getElementById('inputText').value;
-            
+
             var sourceLanguageCode = selectDrop[0].value;
             var targetLanguageCode = selectDrop[1].value;
-        
+
 
             var params = {
 
@@ -340,22 +375,83 @@
 
     <p style="display: none;" id="data_extract">{{jsonData}}</p>
     <script>
-        
+
         let data = document.getElementById('data_extract').innerHTML;
         let dataFromApi = JSON.parse(data);
         let value = dataFromApi.text;
         loadLang();
         document.getElementById('inputText').value = value;
-        
+
     </script>
 
-    <script src="{{ url_for('static',filename='script/clearInput.js') }}"> </script>
+    <!-- <script src="{{ url_for('static',filename='script/clearInput.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/swapText.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/speechTotext.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/dist/main.js') }}"> </script>
     <script src="{{ url_for('static',filename='script/loadFileAsText.js') }}"> </script>
-    <script src="{{ url_for('static',filename='script/copyText.js') }}"> </script>
+    <script src="{{ url_for('static',filename='script/copyText.js') }}"> </script> -->
 
+    <script>
+        const bottom_side = document.getElementsByClassName('bottom-side')[0];
+        function showThing() {
+
+            if (document.querySelector('.bottom-side .download_file_select').classList.contains('show') == true
+                || document.querySelector('.upload_imgs_container').classList.contains('show') == true)
+                bottom_side.classList.add('show');
+            else {
+                bottom_side.classList.remove('show');
+            }
+        }
+        document.getElementsByClassName('upload-btn')[0].addEventListener('click', function () {
+            var upload_imgs_container = document.querySelector('.upload_imgs_container');
+            upload_imgs_container.classList.toggle('show');
+            showThing();
+
+
+        });
+
+        document.getElementsByClassName('download-btn')[0].addEventListener('click', function () {
+            var download_file_container = document.querySelector('.bottom-side .download_file_select');
+            download_file_container.classList.toggle('show');
+
+            showThing();
+
+        })
+
+
+    </script>
+
+    <script>
+        const   outputText = document.getElementById("outputText"),
+                downloadFile_name = document.getElementById("downloadFile_name"),
+                selectFile_Type = document.getElementById("selectFile_Type"),
+                downloadFile = document.getElementById("downloadFile");
+
+        selectFile_Type.addEventListener("change", () => {
+            const selectedFormat = selectFile_Type.options[selectFile_Type.selectedIndex].text;
+            //    downloadFile.innerText = `Save As ${selectedFormat.split(" ")[0]} File`;
+        });
+
+        downloadFile.addEventListener("click", () => {
+            if (downloadFile_name.value.trim() === "") {
+                downloadFile_name.value = "translatedFile";
+            }
+
+            const blob = new Blob([outputText.value], { type: selectFile_Type.value });
+            const fileUrl = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.download = downloadFile_name.value;
+            link.href = fileUrl;
+            link.click();
+        });
+    </script>
+    <script src="../static/script/loadLang.js"></script>
+    <script src="../static/script/clearInput.js"> </script>
+    <script src="../static/script/swapText.js"> </script>
+    <script src="../static/script/speechTotext.js"> </script>
+    <script src="../static/script/dist/main.js"> </script>
+    <script src="../static/script/loadFileAsText.js"> </script>
+    <script src="../static/script/copyText.js"> </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.1.9/docxtemplater.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.6.1/jszip.js"></script>

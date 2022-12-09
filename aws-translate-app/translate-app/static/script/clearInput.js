@@ -1,10 +1,6 @@
 function clearInputs() {
     document.getElementById('inputText').value = "";
     document.getElementById('outputText').value = "";
-    // document.getElementById("sourceLanguageCodeDropdown").value = "en";
-    // document.getElementById("targetLanguageCodeDropdown").value = "vi";
-    // document.getElementById("filename").value = "";
-
     document.getElementById('clear-btn').style.display = "none";
     document.getElementById('copy-btn').style.display = "none";
 
