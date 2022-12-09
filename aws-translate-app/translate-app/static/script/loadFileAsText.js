@@ -27,15 +27,30 @@ function readDocxFile() {
 
     var reader = new FileReader();
     reader.onload = function () {
-        try{
+        try {
             var zip = new JSZip(reader.result);
             var doc = new window.docxtemplater().loadZip(zip);
             var text = doc.getFullText();
             document.getElementById("inputText").value = text;
+
+
+
             doTranslate();
 
-        }catch{
-            alert("Không hỗ Trợ định đạng file này")
+        } catch {
+            try {
+                var zip = new JSZip(content);
+                var doc = new Docxtemplater().loadZip(zip);
+                var text = doc.getFullText();
+
+                // document.getElementById("inputText").value = text;
+                document.getElementById("inputText").value = "Không hỗ trợ";
+                doTranslate();
+
+            }
+            catch {
+                alert("Không hỗ Trợ định đạng file này");
+            }
         }
     };
     reader.readAsBinaryString(fileToLoad[0]);
@@ -70,8 +85,8 @@ input_img.addEventListener('change', function () {
             }
             else {
                 // console.log(isValidFile(file[i]));
-                files.push(file[i])
-                type.push(3)
+                files.push(file[i]);
+                type.push(3);
                 x = 3;
             }
         }
@@ -87,12 +102,12 @@ input_img.addEventListener('change', function () {
         showImages();
         document.getElementById('submit_textract_btn').click();
     }
-    else{
-        try{
-            readDocxFile()
-            showImages()
-        }catch{
-            alert("Không hỗ Trợ định đạng file này")
+    else {
+        try {
+            readDocxFile();
+            showImages();
+        } catch {
+            alert("Không hỗ Trợ định đạng file này");
         }
     }
 });
@@ -123,7 +138,7 @@ function showImages() {
             <span>${files[i].name}</span>
             <span class="delImgbtn" onclick="delImg(${i})">&times;</span>
         </div>`;
-        }else{
+        } else {
             imgs += `<div class="img">
             <img src='https://www.pngall.com/wp-content/uploads/5/Mobile-Application-PNG-Image.png'
             alt="${files[i].name}">
@@ -170,8 +185,8 @@ form.addEventListener('drop', (e) => {
             }
             else {
                 // console.log(isValidFile(file[i]));
-                files.push(file[i])
-                type.push(3)
+                files.push(file[i]);
+                type.push(3);
                 x = 3;
             }
         }

@@ -1,4 +1,4 @@
-from flask import render_template, Flask, request
+from flask import redirect, render_template, Flask, request, url_for
 import boto3
 import json
 account_id = "AKIAYTOWXMDS7HLSJNXL"
@@ -47,6 +47,7 @@ def extractImage():
         "text": extractedText
     }
     print(responseJson)
+    # return redirect(url_for("main"), jsonData=json.dumps(responseJson))
     return render_template("index.html", jsonData=json.dumps(responseJson))
 
 
